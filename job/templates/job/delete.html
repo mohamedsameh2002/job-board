@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Delete</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<div class="job_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="job_details_header">
+                    <div class="single_jobs white-bg d-flex justify-content-between">
+                        <div class="jobs_left d-flex align-items-center">
+                            <div class="jobs_conetent">
+                                <div class="links_locat d-flex align-items-center">
+                                    <div class="location">
+                                    </div>
+                                    <div class="location">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jobs_right">
+                            <div class="apply_now">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="descript_wrap white-bg">
+                    <div class="single_wrap">
+                        <h4>You are about to delete ({{delete.title}}) from the jobs you have posted</h4>
+                        <hr>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="submit_btn">
+                            <form method="post">
+                                {% csrf_token %}
+                                <button class="boxed-btn3 w-100" type="submit">Delete!</button>
+                            </form>
+                            <br>
+                            <hr>
+                            <a href="{% url 'job_list' %}" class="boxed-btn3 w-100">Back</a>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

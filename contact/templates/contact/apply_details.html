@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>Request details</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<div class="job_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="job_details_header">
+                    <div class="single_jobs white-bg d-flex justify-content-between">
+                        <div class="jobs_left d-flex align-items-center">
+                            <div class="jobs_conetent">
+                                <h4>{{apply_details.name}}</h4>
+                                <div class="links_locat d-flex align-items-center">
+                                    <div class="location">
+                                    </div>
+                                    <div class="location">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jobs_right">
+                            <div class="apply_now">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="descript_wrap white-bg">
+                    <div class="single_wrap">
+                        <h4>about himself</h4>
+                        <p>{{apply_details.cover_letter}}</p>
+                    </div>
+                    <div class="single_wrap">
+                        <h4>His Email</h4>
+                        <ul>
+                            </li>
+                            <li>{{apply_details.email}}</li>
+                        </ul>
+                    </div>
+                    <div class="single_wrap">
+                        <h4>His Website</h4>
+                        <a href="{{apply_details.website}}">{{apply_details.website}}</a>
+                    </div>
+                    <div class="single_wrap">
+                        <h4>CV</h4>
+                        <a href="{% url 'cv' apply_details.slug %}">The applicant's CV.url</a>
+                        <br>
+                        <br>
+                        <br>
+                        <a href="{% url 'delete' apply_details.slug %}" class="boxed-btn3 w-100">Delete</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

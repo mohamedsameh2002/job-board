@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load social_share %}
+{% block body %}
+
+
+
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_1">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text">
+                    <h3>{{jobs.title}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ bradcam_area  -->
+
+<div class="job_details_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="job_details_header">
+                    <div class="single_jobs white-bg d-flex justify-content-between">
+                        <div class="jobs_left d-flex align-items-center">
+
+                            <div class="jobs_conetent">
+                                <a href="#">
+                                    <h4>{{jobs.title}}</h4>
+                                </a>
+                                <div class="links_locat d-flex align-items-center">
+                                    <div class="location">
+                                        <p> <i class="fa fa-map-marker"></i> {{jobs.city}}, {{jobs.Country}}</p>
+                                    </div>
+                                    <div class="location">
+                                        <p> <i class="fa fa-clock-o"></i> {{jobs.jop_type}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="jobs_right">
+                            <div class="apply_now">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="descript_wrap white-bg">
+                    <div class="single_wrap">
+                        <h4>Job description</h4>
+                        <p> {{jobs.description}} </p>
+                    </div>
+                </div>
+                <div class="apply_job_form white-bg">
+                    {% if request.user == jobs.owner %}
+                    <a href="{% url 'delete_job' jobs.slug  %}" class="boxed-btn3 w-100">Delete</a>
+                    <hr>
+                    <form method="post">
+                        <a href="{% url 'edit_job' jobs.slug %}" class="boxed-btn3 w-100" >Edit</a>
+                    </form>
+                    {% else %}
+                    <h4>Apply for the job</h4>
+                        <form method='POST' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% bootstrap_form Aform %}
+                            {% buttons %}
+                            <button class="boxed-btn3 w-100" type="submit">Apply Now</button>
+                            <hr>
+                            {% endbuttons %}
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="job_sumary">
+                    <div class="summery_header">
+                        <h3>Job Summery</h3>
+                    </div>
+                    <div class="job_content">
+                        <ul>
+                            <li>Published on: <span>{{jobs.Published_at|date:"d M o"}}</span></li>
+                            <li>Vacancy: <span>{{jobs.Vacancy}}</span></li>
+                            <li>Salary: <span>{{jobs.Salary}} k/y</span></li>
+                            <li>Location: <span> {{jobs.city}} in {{jobs.Country}} </span></li>
+                            <li>Job Nature: <span> {{jobs.jop_type}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="share_wrap d-flex">
+                    <span>Share at:</span>
+                    <ul>
+                        {% comment %} <li><a href="https://www.facebook.com/"> <i class="fa fa-facebook"></i></a> </li>
+                        <li><a href="https://mail.google.com/mail/u/0/"> <i class="fa fa-google-plus"></i></a> </li>
+                        <li><a href="d"> <i class="fa fa-twitter"></i></a> </li> {% endcomment %}
+
+                        <li>{% post_to_facebook object_or_url "<p class='fa fa-facebook'></p>" %}</li>
+                        <li>{% post_to_twitter "the job" object_or_url "<p class='fa fa-twitter'></p>" %}</li>
+                        <li>{% post_to_linkedin object_or_url "<p class='fa fa-facebook'></p>" %}</li>
+
+                        {% comment %} <li>{% post_to_facebook object_or_url "<p class='fa fa-google-plus'></p>" %}</li>
+                        {% endcomment %}
+                        {% comment %} {% post_to_twitter <text_to_post>
+                            <object_or_url>
+                                <link_text>
+                                    <link_class> %} {% endcomment %}
+
+                    </ul>
+                </div>
+                <div class="job_location_wrap">
+                    <div class="job_lok_inner">
+
+                        <script
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap"></script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
